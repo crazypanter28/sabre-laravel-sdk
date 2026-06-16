@@ -16,9 +16,6 @@ class SabreAuthService
         $this->client = $client;
     }
 
-    /**
-     * Get a valid token (from cache or fresh from Sabre).
-     */
     public function getToken(): string
     {
         $minutes = config('sabre.token_cache_minutes', 8640);
@@ -28,18 +25,12 @@ class SabreAuthService
         });
     }
 
-    /**
-     * Force a fresh token ignoring cache.
-     */
     public function refreshToken(): string
     {
         Cache::forget($this->cacheKey);
         return $this->getToken();
     }
 
-    /**
-     * Request a new token from Sabre OAuth endpoint.
-     */
     protected function fetchToken(): string
     {
         $clientId     = config('sabre.client_id');
@@ -49,7 +40,10 @@ class SabreAuthService
             throw new SabreException('Sabre credentials are not configured. Check SABRE_CLIENT_ID and SABRE_CLIENT_SECRET in your .env file.');
         }
 
-        $credentials = base64_encode("{$clientId}:{$clientSecret}");
+        // Sabre requiere encodear cada parte por separado y luego combinarlas
+        $encodedId     = base64_encode($clientId);
+        $encodedSecret = base64_encode($clientSecret);
+        $credentials   = base64_encode($encodedId . ':' . $encodedSecret);
 
         $response = $this->client->post('/v2/auth/token', [
             'headers' => [
