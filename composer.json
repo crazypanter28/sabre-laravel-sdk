@@ -1,54 +1,93 @@
+
 {
+
     "name": "crazypanter28/sabre-laravel-sdk",
+
     "description": "Laravel SDK for Sabre GDS REST API - Authentication, Passengers, Flights and more",
-    "version": "0.1.0",
+
+    "version": "0.1.1",
+
     "type": "library",
-    "keywords": [
-        "sabre",
-        "gds",
-        "laravel",
-        "travel",
-        "flights",
-        "hotels",
-        "sdk"
-    ],
+
+    "keywords": ["sabre", "gds", "laravel", "travel", "flights", "hotels", "sdk"],
+
     "license": "MIT",
+
     "authors": [
+
         {
+
             "name": "Alonso Montiel Villar",
+
             "email": "alonso.locseg@gmail.com"
+
         }
+
     ],
+
     "require": {
+
         "php": "^8.1",
-        "illuminate/support": "^10.0|^11.0|^12.0",
+
+        "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+
         "guzzlehttp/guzzle": "^7.0"
+
     },
+
     "require-dev": {
+
         "phpunit/phpunit": "^10.0|^11.0",
+
         "orchestra/testbench": "^8.23|^9.0|^10.0"
+
     },
+
     "autoload": {
+
         "psr-4": {
+
             "SabreLaravel\\": "src/"
+
         }
+
     },
+
     "autoload-dev": {
+
         "psr-4": {
+
             "SabreLaravel\\Tests\\": "tests/"
+
         }
+
     },
+
     "extra": {
+
         "laravel": {
+
             "providers": [
+
                 "SabreLaravel\\SabreServiceProvider"
+
             ],
+
             "aliases": {
+
                 "SabreAuth": "SabreLaravel\\Facades\\SabreAuth",
+
                 "SabrePassenger": "SabreLaravel\\Facades\\SabrePassenger"
+
             }
+
         }
+
     },
+
     "minimum-stability": "stable",
+
     "prefer-stable": true
+
 }
+
